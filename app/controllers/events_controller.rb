@@ -4,7 +4,8 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = Event.where(:start_time.gte => Date.parse(params[:start_time]),
+                          :end_time.lte => Date.parse(params[:end_time]))
   end
 
   # GET /events/1
@@ -70,5 +71,9 @@ class EventsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def event_params
       params.fetch(:event, {})
+    end
+
+    def permit_params
+      params.permit(:start_time, :end_time)
     end
 end

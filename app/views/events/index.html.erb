@@ -5,6 +5,9 @@
 <table>
   <thead>
     <tr>
+      <th>Event</th>
+      <th>Start at</th>
+      <th>End at</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -12,9 +15,9 @@
   <tbody>
     <% @events.each do |event| %>
       <tr>
-        <td><%= link_to 'Show', event %></td>
-        <td><%= link_to 'Edit', edit_event_path(event) %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= event.title %></td>
+        <td><%= event.start_time.strftime('%d/%m/%Y - %H:%M') %></td>
+        <td><%= event.end_time.strftime('%d/%m/%Y - %H:%M') %></td>
       </tr>
     <% end %>
   </tbody>
