@@ -10,5 +10,9 @@ class User
   validates :email, presence: true
   validates :phone, presence: true
 
-  has_many :user_events
+  has_many :user_events, dependent: :destroy
+
+  def self.creater
+    User.first
+  end
 end

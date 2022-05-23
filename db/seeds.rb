@@ -10,8 +10,7 @@ require 'csv'
 #seeding user data
 puts 'adding user seed data'
 CSV.foreach(Rails.root.to_s + '/db/seed_csvs/users.csv', headers: true) do |row|
-  user = User.new
-  user.username = row['username']
+  user = User.find_or_initialize_by(username: row['username'])
   user.email = row['email']
   user.phone = row['phone']
   user.save!
@@ -20,7 +19,7 @@ puts 'added user seed data'
 
 #seeding event data
 puts 'adding event seed data'
-event_creater_id = User.first.id
+event_creater_id = User.creater.id
 CSV.foreach(Rails.root.to_s + '/db/seed_csvs/events.csv', headers: true) do |row|
   event = Event.new
   event.title = row['title']
@@ -31,7 +30,7 @@ CSV.foreach(Rails.root.to_s + '/db/seed_csvs/events.csv', headers: true) do |row
   event.created_by_id = event_creater_id
 	event.save!
 
-	puts "adding rsvp data for event #{event.title}"
+	# puts "adding rsvp data for event #{event.title}"
 	next if row['users#rsvp'].nil? || row['users#rsvp'].empty?
 	rsvp_arr = row['users#rsvp'].split(';')
 
@@ -47,7 +46,6 @@ CSV.foreach(Rails.root.to_s + '/db/seed_csvs/events.csv', headers: true) do |row
 			event_id: event.id
 		})
 	end
-	puts "added rsvp data for event #{event.title}"
-
+	# puts "added rsvp data for event #{event.title}"
 end
 puts 'adding event seed data'

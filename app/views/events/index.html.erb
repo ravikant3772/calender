@@ -8,6 +8,8 @@
       <th>Event</th>
       <th>Start at</th>
       <th>End at</th>
+      <th>All Day</th>
+      <th>Completed</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -18,6 +20,8 @@
         <td><%= event.title %></td>
         <td><%= event.start_time.strftime('%d/%m/%Y - %H:%M') %></td>
         <td><%= event.end_time.strftime('%d/%m/%Y - %H:%M') %></td>
+        <td><%= event.is_all_day %></td>
+        <td><%= event.completed %></td>
       </tr>
     <% end %>
   </tbody>

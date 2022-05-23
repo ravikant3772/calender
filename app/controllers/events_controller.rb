@@ -4,8 +4,8 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.where(:start_time.gte => Date.parse(params[:start_time]),
-                          :end_time.lte => Date.parse(params[:end_time]))
+
+    @events = Event.where(filter_object)
   end
 
   # GET /events/1
@@ -66,6 +66,17 @@ class EventsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_event
       @event = Event.find(params[:id])
+    end
+
+    # to set query filters for start_time and end_time
+    def filter_object
+      if (params[:start_time].present? & params[:end_time].present?)
+        return {
+          :start_time.gte => Date.parse(params[:start_time]),
+          :end_time.lte => Date.parse(params[:end_time])
+        }
+      end
+      return {}
     end
 
     # Only allow a list of trusted parameters through.
