@@ -1,7 +1,7 @@
 # Calender
 
 # database 
-Mongodb
+Mongodb   
 gem for db connection: mongoid
 
 # Assumption
@@ -10,8 +10,8 @@ gem for db connection: mongoid
 
 # seed data
 keep users.csv and events.csv files at following path:
-db/seed_csvs/events.csv
-db/seed_csvs/users.csv
+>db/seed_csvs/events.csv   
+>db/seed_csvs/users.csv
 
 ```RAILS_ENV=development rails db:seed```
 
